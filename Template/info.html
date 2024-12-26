@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+News
+{% endblock title %}
+
+
+{% block body %}
+
+    <section style="width: 90%; display: flex; flex-direction: column; border: 1px red solid; border-radius: 10px; margin: 100px auto 80px;padding: 20px 30px; background-color: #fff7f7b3;">
+        <div style="padding: 10px 25px 5px;">
+           <h1 style="    font-size: 36px;
+           font-style: oblique;
+           text-transform: uppercase;;">YOUR SEARCH RESULTS FOR {{search}}</h1> 
+        </div>
+
+        <hr style="margin-bottom:50px"/>
+
+        
+
+        <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: space-evenly; row-gap: 20px;">
+            {% for x in data.results %}
+            <div
+                style="box-shadow: 0 0 3px grey;
+                width: 350px;
+                height: fit-content;
+                display: flex;
+                flex-direction: column;
+                gap: 20px">
+                <div style="width: 100%; height: 200px;">
+                    <img src="{{x.image}}" style="width: 100%; height: 100%;" alt="Image not load" />
+                </div>
+                <div style="padding: 0 10px 10px;">
+                <div style="text-align: start;">
+                    <a href="{{x.link}}" style="text-decoration: none; color:black" target="_blank">
+                        <h3>{{x.title}}</h3>
+                    </a>
+                </div>
+          
+
+                <div style="display: flex; justify-content: space-between;font-size: 14px; color: rgb(161, 161, 161);">
+                    <div>
+                        <p>{{x.Creator}}</p>
+                    </div>
+                    <div>
+                        <p>{{x.pubDateTime}} {{x.pubTimeZone}}</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+       
+        <div style="margin: 20px; display: flex; justify-content: space-between;">
+            <div style="overflow: hidden; border-radius: 100px 500px 100px">
+                {% if prev is not None %}
+                <a href="{{ prev }}" style="text-decoration: none;">
+                    <button style="border:0; outline: 0; color: white; padding: 10px 20px;background-color:  rgb(223 10 20);">prev</button>
+                </a>
+                {% endif %}
+            </div>
+            <div style="overflow: hidden; border-radius: 100px 500px 100px">
+                {% if next %}
+                <a href="{{ next }}" style="text-decoration: none;">
+                    <button style="border:0; outline: 0; color: white; padding: 10px 20px;background-color: rgb(223 10 20);">Next</button>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+    </section>
+
+
+    <section style="width: 90%; display: flex; flex-direction: column; border-radius: 10px; margin: 0 auto;padding: 10px 15px;box-shadow: 0 0 3px #f2eeee;">
+        <div style="padding: 10px 25px 5px; background-color: #df0a14; color:#f2eeee; width: 100%;border-radius: 5px; margin-bottom: 5px; ">
+           <h1 style="font-size: 30px;">WEEKS SUGGESTIONS</h1> 
+        </div>
+        
+
+        <div style="width: 98%; background-color: #f9f9f9;  border-radius: 10px;">
+            {% for i in sug.results %}
+            <div style="height: 115px;width: 100%;  overflow: hidden; text-overflow: ellipsis; display: flex; margin-bottom: 10px; border-radius: 5px; overflow: hidden;">
+            <div style="width: 40%; height: 115px;">
+                <img src="{{i.image}}" alt="image not load" style="width: 100%; height:100%">
+            </div>
+             
+            <div style="width: 60%;">
+                <div style="padding: 20px 10px ; display: flex; flex-direction: column; gap: 20px;">
+                    <h1 style="text-align: center;">
+                        <a href="{{i.link}}" target="_blank"  style="text-decoration: none; color:black">
+                            {{i.title}}
+                        </a>
+                      
+                    </h1>
+            
+                </div>
+            </div>
+            
+            </div>
+            {% endfor %}
+        </div>
+       
+
+
+    </section>
+
+{% endblock body %}

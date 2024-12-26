@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Subscription
+{% endblock title %}
+
+{% block body %}
+
+        <Section style="width: 100%;">
+            <div style="width: 95%; display: flex; justify-content: space-evenly; margin: 100px auto; flex-wrap: wrap;">
+
+                {% for e in plans %}
+                <div class="SubsDetailBox">
+                    <div style="text-align: center; font-size: 25px;">
+                        <h1>{{e.title}}</h1>
+                    </div>
+                    <div style="width: 95%; height: 350px;">
+                        <img src="https://subscribe.theweek.com/pubs/W0/TWE/images/2023/pw23-digital-pkg.png" alt="image not load" style="width: 100%; height: 100%;"/>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <div style="display: flex; gap: 10px; align-items: baseline; ">
+                            <div style="width: 10px; height: 10px; border-radius: 50%; background-color: rgb(144 231 123);">
+    
+                            </div>
+                            <div style="font-weight: 600;">
+                                <p>{{e.featureOne}}</p>
+                            </div>
+                        </div>
+    
+                        <div style="display: flex; gap: 10px; align-items: baseline; ">
+                            <div style="width: 20px; height: 10px; border-radius: 50%; background-color: rgb(144 231 123);">
+    
+                            </div >
+                            <div style="font-weight: 600;">
+                                <p>{{e.featureTwos}}</p>
+                            </div>
+                        </div>
+    
+                        <div style="display: flex; gap: 10px; align-items: baseline;">
+                            <div style="width: 10px; height: 10px;border-radius: 50%; background-color: rgb(144 231 123);">
+    
+                            </div>
+                            <div style="font-weight: 600;">
+                                <p>{{e.featureThree}}</p>
+                            </div>
+                        </div>
+    
+                        <div style="display: flex; gap: 10px; align-items: baseline;">
+                            <div style="width: 15px;height: 10px; border-radius: 50%; background-color: rgb(144 231 123);">
+    
+                            </div>
+                            <div style="font-weight: 600;">
+                                <p>{{e.featureFour}}</p>
+                            </div>
+                        </div>
+    
+                        <div style="display: flex; gap: 10px; align-items: baseline;">
+                            <div style="width: 10px;height: 10px; border-radius: 50%; background-color: rgb(144 231 123);">
+    
+                            </div>
+                            <div style="font-weight: 600;">
+                                <p>{{e.featureFive}}</p>
+                            </div>
+                        </div>
+                        {% if e.featureSix != 'blank' %}
+                        <div style="display: flex; gap: 10px; align-items: baseline;">
+                            <div style="width: 10px;height: 10px; border-radius: 50%; background-color: rgb(144 231 123);">
+    
+                            </div>
+                            <div style="font-weight: 600;">
+                                <p>{{e.featureSix}}</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 10px; align-items: baseline;">
+                            <div style="width: 10px;height: 10px; border-radius: 50%; background-color: rgb(144 231 123);">
+    
+                            </div>
+                            <div style="font-weight: 600;">
+                                <p>{{e.featureSeven}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div style="background-color: #e70c26; padding: 20px 40px;  font-size: 30px; text-align: center; ">
+                        <a href="/payment/{{e.amount}}" style="text-decoration: none; color: white;">
+                            <button type="submit" id="checkout-button" style="background-color: #e70c26; color: white; border: 0; outline: 0; font-size: 16px;" > Subscribe At {{e.amount}} RS <i class="fi fi-rr-angle-right"></i></button>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </Section>
+        
+{% endblock body %}

@@ -1,0 +1,138 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <title>Document</title>
+    <style>
+        * , body{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body style="background-color: #4d4f55;">
+    
+    <section style="position:relative;background-color: white; display: flex; flex-direction: column; width: 300px;  margin:100px auto; border-radius: 7px; box-shadow: 0px 7px 74px 4px black;
+    overflow: hidden;">
+        <form method="post" action="">
+            {% csrf_token %}
+            <div style="background-color: #df0a14; color: white; width: fit-content; padding: 10px 35px; margin: 10px auto; border-radius: 3px;">
+                <h1>THE WEEK</h1>
+            </div>
+    
+            <div style="text-align: center; color: #57585b;">
+                Fill the form
+            </div>
+
+            <div style="padding: 20px; display: flex; flex-direction: column; gap: 15px;">
+                <div style="display: flex; border: 1px solid gray; border-radius: 3px;">
+                    <div style="padding: 10px; background-color: #ece6e6;;">
+                        <i class="fi fi-br-envelope" style="color: #979797;"></i>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Full Name" style="border: 0;
+                        outline: 0;
+                        text-align: center;
+                        padding: 10px;
+                        font-size: 14px;" name="username" id="username" value="{{user.username}}"/>
+                    </div>
+                </div>
+                <div style="display: flex; border: 1px solid gray; border-radius: 3px;">
+                    <div style="padding: 10px; background-color: #ece6e6;;">
+                        <i class="fi fi-br-envelope" style="color: #979797;"></i>
+                    </div>
+                    <div>
+                        <input type="email" placeholder="yours@example.com" style="border: 0;
+                        outline: 0;
+                        text-align: center;
+                        padding: 10px;
+                        font-size: 14px;" name="email" id="email" value="{{user.email}}"/>
+                    </div>
+                </div>
+
+                <div style="display: flex; border: 1px solid gray; border-radius: 3px;">
+                    <div style="padding: 10px; background-color: #ece6e6;;">
+                        <i class="fi fi-br-envelope" style="color: #979797;"></i>
+                    </div>
+                    <div>
+                        <input type="number" placeholder="91XXXXXXX" style="border: 0;
+                        outline: 0;
+                        text-align: center;
+                        padding: 10px;
+                        font-size: 14px;" name="contact" id="contact"/>
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="width: 35%; border: 1px solid gray; border-radius: 3px;">
+                        <input  type="text" placeholder="city" style="border: 0;
+                        outline: 0;
+                        text-align: center;
+                        padding: 10px;
+                        font-size: 14px; width: 100%;" name="city" id="city"/>
+                    </div>
+
+                    <div style="width: 25%; border: 1px solid gray; border-radius: 3px;">
+                        <input  type="text" placeholder="state" style="border: 0;
+                        outline: 0;
+                        text-align: center;
+                        padding: 10px;
+                        font-size: 14px; width: 100%;" name="state" id="state"/>
+                    </div>
+
+                    <div  style="width: 25%; border: 1px solid gray; border-radius: 3px;">
+                        <input  type="text" placeholder="country" style="border: 0;
+                        outline: 0;
+                        text-align: center;
+                        padding: 10px;
+                        font-size: 14px; width: 100%;" name="country" id="country" value="India"/>
+                    </div>
+                </div>
+        
+             
+            </div>
+
+            <div style="background-color: #e70c26; padding: 20px 40px;  font-size: 30px; text-align: center; ">
+                <button type="submit" id="rzp-button1"  style="background-color: #e70c26; color: white; border: 0; outline: 0; font-size: 16px;" > pay {{amount}} RS<i class="fi fi-rr-angle-right"></i></button>
+            </div>
+        </form>
+   
+    </section>
+
+    <!-- <button id="rzp-button1">Pay</button> -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_a5aCYsNePZ78P2", // Enter the Key ID generated from the Dashboard
+    "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Subscription purchase", //your business name
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "callback_url": "http://127.0.0.1:8000/success/",
+    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+        "name": "{{user.username}}", //your customer's name
+        "email": "{{user.email}}",
+        "contact": "" //Provide the customer's phone number for better conversion rates 
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+</body>
+</html>

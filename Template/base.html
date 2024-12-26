@@ -1,0 +1,475 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} {% endblock title %} | News </title>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-straight/css/uicons-bold-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <style>
+        *,
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .SubsDetailBox {
+            border: 1px solid red;
+            border-radius: 10px;
+            width: 40%;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .NewsBox {
+            box-shadow: 0 0 3px grey;
+            width: 40%;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px 20px;
+        }
+
+        #navBar {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        #hr {
+            border-left: 1.4px solid grey;
+            transform: rotate(180deg);
+            opacity: 0.3;
+            height: 20px;
+        }
+
+        #CatBox {
+            height: fit-content;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            gap: 40px;
+            
+        }
+
+        #CatLeft {
+            flex: 40%
+        }
+
+        #CatRight {
+            flex: 60%
+        }
+
+        #SearchBar,
+        #HideClick,
+        #ThreeLineBar,
+        #HideMenu {
+            display: none;
+        }
+
+        #SearchBar {
+            width: 95%;
+            left: 2%;
+            z-index: 1;
+            border: 3px solid black;
+            border-radius: 3px;
+            position: absolute;
+            background-color: white;
+            padding: 25px;
+            transition: all 300ms ease-in;
+        }
+
+        .RightHeading {
+            padding: 20px 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #title {
+            background-color: #df0a14;
+            padding: 0px 20px;
+        }
+
+        #title h1 {
+            color: white;
+            font-size: 50px;
+        }
+
+        #MenuBar {
+            display: flex;
+            gap: 45px;
+            align-items: center;
+            padding-right: 10px;
+        }
+
+        #CatSection {
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            border: 1px red solid;
+            border-radius: 10px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            background-color: #fff7f7b3;
+        }
+
+        #picsSubs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #catMenu {
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        #catMenu ul {
+            display: flex;
+            width: 80%;
+            margin: 0 auto;
+            list-style: none;
+            justify-content: space-between;
+            font-weight: bold;
+            flex-wrap: wrap;
+        }
+
+        .MenuHr {
+            display: none;
+        }
+
+        #mainBox {
+            width: 100%;
+            margin: 150px 0 0 0;
+        }
+
+        @media screen and (max-width:768px) {
+            .SubsDetailBox {
+                width: 100%;
+            }
+
+            #mainBox {
+                width: 100%;
+                margin: 300px 0 0 0;
+            }
+
+            #catMenu {
+                margin: 30px 0;
+            }
+
+            #catMenu ul {
+                gap: 15px;
+                column-gap: 20px;
+            }
+
+            #HideMenu {
+                display: block;
+            }
+
+            .NewsBox {
+                width: 100%;
+            }
+
+            #title h1 {
+                font-size: 34px;
+                padding: 20px;
+            }
+
+            #navBar {
+                width: 100%;
+                height: 100%;
+
+                padding: 0 84px;
+            }
+
+            #click,
+            #hr,
+            #picsSubs {
+                display: none;
+            }
+
+            .MenuHr {
+                display: block;
+                width: 100%;
+            }
+
+            #MenuBar {
+                position: fixed;
+                top: -180px;
+                background-color: white;
+                box-shadow: 0 0 1px gray;
+                width: 100%;
+                height: fit-content;
+                padding: 10px 0;
+                display: flex;
+                flex-direction: column;
+                right: 0;
+                gap: 20px;
+                transition: all 100ms ease-in;
+            }
+
+            #ThreeLineBar {
+                display: block;
+                transform: rotate(90deg);
+            }
+
+            #SearchBar {
+                display: block;
+                position: static;
+                margin: auto;
+            }
+
+            #CatBox {
+                height: fit-content;
+                flex-wrap: wrap;
+            }
+
+            #CatLeft {
+                flex: 100%
+            }
+
+            #CatRight {
+                flex: 100%;
+                font-size: 20px;
+                height: 300px;
+                overflow: hidden;
+            }
+
+            .RightHeading {
+                padding: 10;
+
+            }
+
+            #CatSection {
+                padding: 20px 15px;
+            }
+
+            .RightHeading h1 {
+                font-size: 20px;
+
+            }
+
+        }
+
+        @media screen and (max-width:400px) {
+            #title h1 {
+                padding: 0;
+            }
+        }@media screen and (min-width:700px) and (max-width:850px) {
+            #title h1 {
+                font-size: 45px;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <header style="width: 100%; height: 100px;">
+        <nav id="navBar">
+            <div id="picsSubs">
+                <div style="width: 70px;">
+                    <img src="https://u989.theweek.com/rest/v2/dialogues/files/563db270-c779-43a4-b2e6-8f32841bc0ad/The_Week_US_July24_Packshot_500x440.png"
+                        alt="subs" style="width: 100%;" />
+                </div>
+
+                <div style="color: #df0a14;">
+                    <p>SUBSCRIBE & SAVE</p>
+                </div>
+            </div>
+
+            <div id="title">
+                <h1>
+                    THE WEEK
+                </h1>
+            </div>
+
+            <div id="ThreeLineBar" onclick="ShowMenu()">
+                <i class="fi fi-br-tally-3"></i>
+            </div>
+            <div id="MenuBar">
+                <div style="font-size: 22px; cursor: pointer;" id="HideMenu" onclick="CloseMenu()">
+                    <i class="fi fi-br-cross-small"></i>
+                </div>
+                <hr class="MenuHr" />
+                {% if user.is_authenticated %}
+                <div style="display: flex; gap: 10px; align-items: start;">
+
+                    <div style="text-transform: capitalize;">
+                        <p>{{user.username}}</p>
+                    </div>
+                    <a href="{% url 'logout' %}" style="text-decoration: none; color: black;">
+                        <div style="font-size: 22px;">
+
+                            <i class="fi fi-br-sign-out-alt"></i>
+
+                        </div>
+                    </a>
+                </div>
+
+                {% else %}
+
+                <div style="display: flex; gap: 5px;">
+                    <div style="font-size: 22px;">
+                        <i class="fi fi-tr-circle-user"></i>
+                    </div>
+                    <div>
+                        <a href="{% url 'login' %}" style="text-decoration: none; color: black;">
+                            <p>login</p>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+                <hr class="MenuHr" />
+                <hr id="hr" />
+                <div style="display: flex; gap:10px; align-items: center;">
+                    <div style="font-size: 22px;">
+                        <a href="{% url 'subscribe' %}" style="text-decoration: none; color: black;">
+                            <i class="fi fi-ss-circle-envelope"></i></a>
+                    </div>
+
+                    <div id="hr" style=""></div>
+
+                    <div style="font-size: 22px; cursor: pointer;" id="Click" onclick="ShowSeacrh()">
+                        <i class="fi fi-bs-search"></i>
+                    </div>
+                    <div style="font-size: 22px; cursor: pointer;" id="HideClick" onclick="HideSeacrh()">
+                        <i class="fi fi-br-cross-small"></i>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <hr style="opacity: 0.4;" />
+
+        <div id="SearchBar">
+            <form style="display: flex;" method="get" action="/info/?search={{search}}">
+
+                <div style="border-left: 1.4px solid grey; transform: rotate(180deg); opacity: 0.3; height: 47px;">
+                </div>
+                <div style="width: 90%; height: 50px;">
+                    <input type="text" placeholder="Type to Search " style="width: 100%;
+                height: 100%;
+                outline: 0;
+                border: 0;
+                font-size: 20px;
+                padding-left: 30px;
+            " name="search" id="search" />
+                </div>
+                <div style="width: 8%; height: 50px;">
+                    <!-- <a href="{% url 'info' %}" style="text-decoration: none; background-color: black;
+                    color: white; ">  </a>-->
+                    <button style="
+                border:0;
+                outline: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: black;
+                    color: white;
+                    font-size: 20px;" type="submit"> <i class="fi fi-bs-search"></i></button>
+                </div>
+
+            </form>
+        </div>
+
+        <div id="catMenu">
+            <ul style="">
+
+                <li><a href="{% url 'home' %}" style="text-decoration: none; color:black">Home</a></li>
+
+                {% for e in cat %}
+
+                <li style="text-transform: capitalize;"><a href="cat/?category={{e}}"
+                        style="text-decoration: none; color:black">{{e}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <hr style="opacity: 0.4;" />
+    </header>
+
+
+    <main id="mainBox" style="">
+        {% block body %}
+        {% endblock body %}
+    </main>
+
+
+    <footer style="width: 100%; height: fit-content; background-color: #e7e2df; padding: 50px 0 0; margin-top: 23px;">
+        <div style="display: flex; flex-direction: column; width: 80%; margin: 0 auto;gap:80px; align-items: center;">
+            <div>
+                <h1>The Week</h1>
+            </div>
+
+            <div>
+                <ul style="display: flex;list-style: none; gap:30px ; flex-wrap: wrap; font-weight: 600;">
+                    <li>About us</li>
+                    <li>Contact Future Experts</li>
+                    <li>Terms And Conditions</li>
+                    <li>Priavcy Policy</li>
+                    <li>Cookie Policy</li>
+                    <li>Advertise With us</li>
+                </ul>
+            </div>
+
+
+
+        </div>
+        <hr style="color : black ;margin: 5px 0 0 0 " />
+        <div style="padding: 10px; text-align: center; font-weight: 600;">
+
+            <p>Copyright rights 2024 rishi tiwari </p>
+        </div>
+    </footer>
+
+    <script>
+
+        let SearchBar = document.getElementById('SearchBar')
+        let SearchBtn = document.getElementById('Click')
+        let CrossBtn = document.getElementById('HideClick')
+        // console.log(SearchBar)
+        let Menu = document.getElementById('MenuBar')
+
+        function ShowMenu() {
+            Menu.style.top = '150px'
+        }
+
+        function CloseMenu() {
+            Menu.style.top = '-180px'
+        }
+        function ShowSeacrh() {
+            CrossBtn.style.display = 'block'
+            SearchBar.style.display = 'block'
+            SearchBtn.style.display = 'none'
+        }
+
+        function HideSeacrh() {
+            CrossBtn.style.display = 'none'
+            SearchBar.style.display = 'none'
+            SearchBtn.style.display = 'block'
+        }
+    </script>
+
+
+
+</body>
+
+</html>

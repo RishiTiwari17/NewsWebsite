@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Category
+{% endblock title %}
+
+{% block body %}
+
+    <section id="CatSection" >
+        <div style="padding: 10px 25px 5px;">
+           <h1 style="font-size: 60px;">{{category}} TRENDS</h1> 
+        </div>
+
+        <hr style="margin-bottom:50px"/>
+
+        
+
+        <div style="width: 98%; background-color: #f9f9f9;  border-radius: 10px;">
+            {% for i in res.results %}
+            <div id="CatBox" >
+            <div id="CatLeft">
+                <img src="{{i.image}}" alt="image not load" style="width: 100%; height:100%">
+            </div>
+             
+            <div  id="CatRight" >
+                <div class="RightHeading" style="">
+                    <h1 style="text-align: center;">
+                        <a href="{{i.link}}" target="_blank"  style="text-decoration: none; color:black">
+                            {{i.title}}
+                        </a>
+                      
+                    </h1>
+                    <p style="text-align: start; font-size: 20px;">
+                        {{i.description}}
+                    </p>
+                </div>
+            </div>
+            
+            </div>
+            <hr style="margin:2% 7% 3% 4%;; padding: 0 20px;" />
+            {% endfor %}
+        </div>
+       
+
+
+    </section>
+
+{% endblock body %}
+
+    
